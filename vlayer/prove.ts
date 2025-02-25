@@ -55,7 +55,7 @@ async function testSuccessProvingAndVerification() {
     token: config.token,
   });
   const result = await vlayer.waitForProvingResult({ hash });
-  const [proof, twitterHandle, address] = result;
+  const [proof, address] = result;
   console.log("Has Proof");
 
   if (!isAddress(address)) {
@@ -68,7 +68,7 @@ async function testSuccessProvingAndVerification() {
     address: verifier,
     abi: verifierSpec.abi,
     functionName: "verify",
-    args: [proof, twitterHandle, address],
+    args: [proof, address],
     chain,
     account: account,
   });
@@ -82,35 +82,14 @@ async function testSuccessProvingAndVerification() {
 
   console.log("Verified!");
 
-  const balance = await ethClient.readContract({
+  const isAdult = await ethClient.readContract({
     address: verifier,
     abi: verifierSpec.abi,
-    functionName: "balanceOf",
-    args: [citizenAccountAddress],
+    functionName: "adults",
+    args: [address],
   });
 
-  assert.strictEqual(balance, 1n);
-
-  const tokenOwnerAddress = await ethClient.readContract({
-    address: verifier,
-    abi: verifierSpec.abi,
-    functionName: "ownerOf",
-    args: [generateTokenId(twitterHandle)],
-  });
-
-  assert.strictEqual(citizenAccountAddress, tokenOwnerAddress);
-
-  const tokenURI = await ethClient.readContract({
-    address: verifier,
-    abi: verifierSpec.abi,
-    functionName: "tokenURI",
-    args: [generateTokenId(twitterHandle)],
-  });
-
-  assert.strictEqual(
-    tokenURI,
-    `https://faucet.vlayer.xyz/api/xBadgeMeta?handle=${twitterHandle}`,
-  );
+  assert.strictEqual(isAdult, true);
 }
 
 async function testFailedProving() {
