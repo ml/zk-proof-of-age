@@ -34,12 +34,12 @@ const webProofConfig: GetWebProofArgs<Abi, string> = {
   },
   logoUrl: "http://twitterswap.com/logo.png",
   steps: [
-    startPage("https://x.com", "Go to x.com login page"),
-    expectUrl("https://x.com/home", "Log in"),
+    startPage("https://www.mobywatel.gov.pl/twoje-dane/pesel", "Go to mObywatel"),
+    expectUrl("https://www.mobywatel.gov.pl/twoje-dane/pesel", "Log in"),
     notarize(
-      "https://api.x.com/1.1/account/settings.json",
+      "https://www.mobywatel.gov.pl/profil/mydata/pesel",
       "GET",
-      "Generate Proof of Twitter profile",
+      "Generate Proof of legal age",
       [
         {
           request: {
