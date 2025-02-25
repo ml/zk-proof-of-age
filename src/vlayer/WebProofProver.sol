@@ -21,8 +21,8 @@ contract WebProofProver is Prover {
     ) public view returns (Proof memory, string memory, address) {
         Web memory web = webProof.verify(DATA_URL);
 
-        string birthDateString screenName = web.jsonGetString("screen_name");
+        string memory birthDateString = web.jsonGetString("birthDate");
 
-        return (proof(), screenName, account);
+        return (proof(), birthDateString, account);
     }
 }

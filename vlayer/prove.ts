@@ -30,7 +30,7 @@ config = getConfig();
 const { chain, ethClient, account, proverUrl, confirmations } =
   await createContext(config);
 
-const twitterUserAddress = account.address;
+const citizenAccountAddress = account.address;
 const vlayer = createVlayerClient({
   url: proverUrl,
 });
@@ -49,7 +49,7 @@ async function testSuccessProvingAndVerification() {
       {
         webProofJson: JSON.stringify(web_proof),
       },
-      twitterUserAddress,
+      citizenAccountAddress,
     ],
     chainId: chain.id,
     token: config.token,
@@ -86,7 +86,7 @@ async function testSuccessProvingAndVerification() {
     address: verifier,
     abi: verifierSpec.abi,
     functionName: "balanceOf",
-    args: [twitterUserAddress],
+    args: [citizenAccountAddress],
   });
 
   assert.strictEqual(balance, 1n);
@@ -98,7 +98,7 @@ async function testSuccessProvingAndVerification() {
     args: [generateTokenId(twitterHandle)],
   });
 
-  assert.strictEqual(twitterUserAddress, tokenOwnerAddress);
+  assert.strictEqual(citizenAccountAddress, tokenOwnerAddress);
 
   const tokenURI = await ethClient.readContract({
     address: verifier,
@@ -125,7 +125,7 @@ async function testFailedProving() {
         {
           webProofJson: JSON.stringify(web_proof_invalid_signature),
         },
-        twitterUserAddress,
+        citizenAccountAddress,
       ],
       chainId: chain.id,
       token: config.token,
