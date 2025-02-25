@@ -40,19 +40,7 @@ const webProofConfig: GetWebProofArgs<Abi, string> = {
       "https://www.mobywatel.gov.pl/profil/mydata/pesel",
       "GET",
       "Generate Proof of legal age",
-      [
-        {
-          request: {
-            // redact all the headers
-            headers_except: [],
-          },
-        },
-        {
-          response: {
-            headers_except: [],
-          },
-        },
-      ],
+      [],
     ),
   ],
 };
