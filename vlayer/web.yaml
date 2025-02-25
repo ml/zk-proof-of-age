@@ -4,8 +4,8 @@ services:
     container_name: wsproxy
     platform: linux/amd64
     ports:
-      - "127.0.0.1:55688:80" 
-    command: "80 api.x.com:443"
+      - "127.0.0.1:55688:80"
+    command: "80 www.mobywatel.gov.pl:443"
   notary-server:
     image: ghcr.io/tlsnotary/tlsn/notary-server:v0.1.0-alpha.7
     container_name: notary-server
@@ -13,4 +13,3 @@ services:
       - "127.0.0.1:7047:7047"
     volumes:
       - ./notary-config:/root/.notary-server/config
-    
