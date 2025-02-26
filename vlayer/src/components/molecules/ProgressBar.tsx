@@ -17,12 +17,12 @@ export const ProgressBar = () => {
       <li
         className={`step ${currentStep?.index !== undefined && currentStep?.index >= 2 ? "step-primary" : ""} text-black text-xs`}
       >
-        Get data from X
+        Prove on mObywatel
       </li>
       <li
         className={`step ${currentStep?.index !== undefined && currentStep?.index >= 3 ? "step-primary" : ""} text-black text-xs`}
       >
-        Mint NFT
+        Verify age
       </li>
     </motion.ul>
   );
